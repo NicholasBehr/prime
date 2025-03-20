@@ -1,0 +1,42 @@
+import matplotlib.pyplot as plt
+from scenarios.scenario_unicorn_noise import UnicornNoise
+from tqdm import tqdm
+
+from feedback_opt.optimizers import (
+    OptimizerDualH,
+    OptimizerDualHProximal,
+    OptimizerDualY,
+    OptimizerPrimal,
+)
+from feedback_opt.simulation import Simulation
+from feedback_opt.systems import SystemElectrical
+from feedback_opt.utils import plot_cost_and_violation
+
+
+def fig_unicorn_noise():
+    # make data
+    # fetch parameters for scenario
+    params = UnicornNoise()
+
+    # override
+    plt.rcParams.update({"figure.figsize": (6, 4)})
+
+    # instatiate objects
+    system = SystemElectrical(params.sys)
+    optimizer = [
+        OptimizerPrimal(params.opt_prim, system),
+        OptimizerDualY(params.opt_dualy, system),
+        OptimizerDualH(params.opt_dualh, system),
+        OptimizerDualHProximal(params.opt_dualhprox_dist, system),
+        OptimizerDualHProximal(params.opt_dualhprox_cent, system),
+    ]
+    simulation = [Simulation(params.sim, system, opt) for opt in optimizer]
+    results = [(sim.optimizer.name, sim.run()) for sim in tqdm(simulation)]
+
+    # plot
+    plot_cost_and_violation(results, transition=15, max_violation=0.06)
+
+
+if __name__ == "__main__":
+    fig_unicorn_noise()
+    plt.show()

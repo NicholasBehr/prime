@@ -1,0 +1,16 @@
+*.pyc
+
+# Packages
+/dist/*
+
+.DS_Store
+.idea/*
+.python-version
+.vscode/*
+.ipynb_checkpoints
+
+/docs/site/*
+.mypy_cache
+
+.venv
+/poetry.toml
