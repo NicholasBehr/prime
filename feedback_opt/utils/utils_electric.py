@@ -12,7 +12,9 @@ def pointybracket(M):
     """
     from Bolognani fast power system analysis via implicit linearization
     """
-    return np.asmatrix(np.vstack((np.hstack((np.real(M), -np.imag(M))), np.hstack((np.imag(M), np.real(M))))))
+    return np.asmatrix(
+        np.vstack((np.hstack((np.real(M), -np.imag(M))), np.hstack((np.imag(M), np.real(M)))))
+    )
 
 
 def pointybracket_forVector(x):
@@ -40,8 +42,12 @@ def R(ucomp):
     return np.asmatrix(
         np.vstack(
             (
-                np.hstack((np.diagflat(np.cos(theta)), -np.diagflat(v) * np.diagflat(np.sin(theta)))),
-                np.hstack((np.diagflat(np.sin(theta)), np.diagflat(v) * np.diagflat(np.cos(theta)))),
+                np.hstack(
+                    (np.diagflat(np.cos(theta)), -np.diagflat(v) * np.diagflat(np.sin(theta)))
+                ),
+                np.hstack(
+                    (np.diagflat(np.sin(theta)), np.diagflat(v) * np.diagflat(np.cos(theta)))
+                ),
             )
         )
     )
@@ -98,6 +104,8 @@ def get_sens_powerInjections_to_voltage(Y, U):
 
     N = makeN(n_nodes * 2)
 
-    Gamma_allNodes = (pointybracket(diag(np.conj(Y * U))) + pointybracket(diag(U)) * N * pointybracket(Y)) * R(U)
+    Gamma_allNodes = (
+        pointybracket(diag(np.conj(Y * U))) + pointybracket(diag(U)) * N * pointybracket(Y)
+    ) * R(U)
 
     return Gamma_allNodes

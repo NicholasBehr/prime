@@ -77,10 +77,14 @@ class OptimizerDualYProximal(OptimizerProximal):
         H = self._system.du_h(data_in["u"])
         p = np.multiply(
             data_out["u"],
-            H.T @ self._system.Y.A.T @ data_out["lamb_y"] + 2 * H.T @ self.quad_y @ data_in["y"] + H.T @ self.lin_y,
+            H.T @ self._system.Y.A.T @ data_out["lamb_y"]
+            + 2 * H.T @ self.quad_y @ data_in["y"]
+            + H.T @ self.lin_y,
         )
         p += self.gamma_u / 2 * np.power(data_out["u"] - data_in["u"], 2)
-        p += np.multiply(data_in["u"] - data_in["u"], H.T @ self.quad_y @ H @ (data_in["u"] - data_in["u"]))
+        p += np.multiply(
+            data_in["u"] - data_in["u"], H.T @ self.quad_y @ H @ (data_in["u"] - data_in["u"])
+        )
         data_out["p"] = p
 
         return data_out

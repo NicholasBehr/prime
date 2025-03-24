@@ -20,7 +20,7 @@ class SystemElectrical(SystemBase):
         # pandapower net
         assert isinstance(params.net_path, str)
         cwd = os.path.abspath(os.getcwd())
-        cwd = cwd[: cwd.rfind("feedback_opt") + len("feedback_opt")]
+        cwd = cwd[: cwd.rfind("prime") + len("prime")]
         self.net = pp.from_json(f"{cwd}/{params.net_path}")
 
         pp.runpp(self.net)
@@ -56,18 +56,29 @@ class SystemElectrical(SystemBase):
         UtilsPd.cart_to_complex(df_sgen, real="max_p_mw", imaginary="max_q_mvar", cmplx="max_u_mw")
         df_sgen["min_u_pu"] = df_sgen["min_u_mw"] / self.base_mva
         df_sgen["max_u_pu"] = df_sgen["max_u_mw"] / self.base_mva
-        UtilsPd.complex_to_cart(df_sgen, cmplx="min_u_pu", real="min_u_real", imaginary="min_u_imag")
-        UtilsPd.complex_to_cart(df_sgen, cmplx="max_u_pu", real="max_u_real", imaginary="max_u_imag")
+        UtilsPd.complex_to_cart(
+            df_sgen, cmplx="min_u_pu", real="min_u_real", imaginary="min_u_imag"
+        )
+        UtilsPd.complex_to_cart(
+            df_sgen, cmplx="max_u_pu", real="max_u_real", imaginary="max_u_imag"
+        )
 
         params.A_u = np.vstack([np.eye(params.m), -np.eye(params.m)])
         params.b_u = np.hstack(
-            [df_sgen["max_u_real"].T, df_sgen["max_u_imag"], -df_sgen["min_u_real"], -df_sgen["min_u_imag"]]
+            [
+                df_sgen["max_u_real"].T,
+                df_sgen["max_u_imag"],
+                -df_sgen["min_u_real"],
+                -df_sgen["min_u_imag"],
+            ]
         ).reshape(-1, 1)
 
         # output constraints
         df_bus = self.net.bus.copy()
         params.A_y = np.vstack([np.eye(params.p), -np.eye(params.p)])
-        params.b_y = np.hstack([df_bus["max_vm_pu"][self.bus_pq], -df_bus["min_vm_pu"][self.bus_pq]]).reshape(-1, 1)
+        params.b_y = np.hstack(
+            [df_bus["max_vm_pu"][self.bus_pq], -df_bus["min_vm_pu"][self.bus_pq]]
+        ).reshape(-1, 1)
 
     def _apply_u(self, u: np.ndarray) -> pd.DataFrame:
         assert np.shape(u) == (self.m, 1)
@@ -104,7 +115,9 @@ class SystemElectrical(SystemBase):
         self._apply_u(u)
 
         # extract complex pu bus voltages
-        UtilsPd.pol_to_complex(self.net.res_bus, absolute="vm_pu", degree="va_degree", cmplx="v_complex")
+        UtilsPd.pol_to_complex(
+            self.net.res_bus, absolute="vm_pu", degree="va_degree", cmplx="v_complex"
+        )
         v_complex = self.net.res_bus["v_complex"].to_numpy()
 
         # obtain voltage to power sensitivity (linearization)
@@ -116,7 +129,10 @@ class SystemElectrical(SystemBase):
             select_pq_in_bus[row, col] = 1
 
         C = np.block(
-            [[select_pq_in_bus, np.zeros_like(select_pq_in_bus)], [np.zeros_like(select_pq_in_bus), select_pq_in_bus]]
+            [
+                [select_pq_in_bus, np.zeros_like(select_pq_in_bus)],
+                [np.zeros_like(select_pq_in_bus), select_pq_in_bus],
+            ]
         )
 
         gamma_c = C.T @ gamma @ C

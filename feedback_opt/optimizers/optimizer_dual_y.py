@@ -53,7 +53,8 @@ class OptimizerDualY(OptimizerGradientStep):
 
         # cost calculation
         data_out["p"] = np.multiply(
-            data_out["u"], self._system.du_h(data_in["u"]).T @ self._system.Y.A.T @ data_out["lamb_y"]
+            data_out["u"],
+            self._system.du_h(data_in["u"]).T @ self._system.Y.A.T @ data_out["lamb_y"],
         )
 
         return data_out

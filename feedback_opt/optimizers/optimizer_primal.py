@@ -23,12 +23,17 @@ class OptimizerPrimal(OptimizerGradientStep):
         data_out = {}
 
         # unconstrained gradient descent
-        step = self.du_phi_u(data_in["u"]) + self._system.du_h(data_in["u"]).T @ self.dy_phi_y(data_in["y"])
+        step = self.du_phi_u(data_in["u"]) + self._system.du_h(data_in["u"]).T @ self.dy_phi_y(
+            data_in["y"]
+        )
         u_hat = data_in["u"] - self.alpha * step
 
         # linearized output constraints Y_u
         A_y_u = self._system.Y.A @ self._system.du_h(data_in["u"])
-        b_y_u = self._system.Y.A @ (self._system.du_h(data_in["u"]) @ data_in["u"] - data_in["y"]) + self._system.Y.b
+        b_y_u = (
+            self._system.Y.A @ (self._system.du_h(data_in["u"]) @ data_in["u"] - data_in["y"])
+            + self._system.Y.b
+        )
         Y_u = Polytope(A_y_u, b_y_u, self._system.m)
 
         # complete input constraints

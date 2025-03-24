@@ -162,7 +162,9 @@ class OptimizerGradientStep(OptimizerBase):
         super().__init__(params=params, system=system)
 
         # primal learning rate
-        assert hasattr(params, "alpha"), "primal learning rate alpha must be defined within the optimizer parameters!"
+        assert hasattr(params, "alpha"), (
+            "primal learning rate alpha must be defined within the optimizer parameters!"
+        )
         assert isinstance(params.alpha, (int, float))
         self.alpha = float(params.alpha)
 
@@ -183,7 +185,9 @@ class OptimizerProximal(OptimizerBase):
         super().__init__(params=params, system=system)
 
         # dual learning rate
-        assert hasattr(params, "rho"), "dual learning rate rho must be defined within the optimizer parameters!"
+        assert hasattr(params, "rho"), (
+            "dual learning rate rho must be defined within the optimizer parameters!"
+        )
         assert isinstance(params.rho, (int, float))
         self.rho = float(params.rho)
 

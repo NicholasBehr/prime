@@ -33,7 +33,9 @@ def fig_meas_noise():
     ax.axhline(y=0.5, color="C3", linestyle="--")
     ax.axhline(y=1.2, color="C3", linestyle="--")
 
-    ax.set(xlim=(-2.5, 1), xticks=np.arange(-2.5, 1.5, 0.5), ylim=(0, 1.5), yticks=np.arange(0, 2, 0.5))
+    ax.set(
+        xlim=(-2.5, 1), xticks=np.arange(-2.5, 1.5, 0.5), ylim=(0, 1.5), yticks=np.arange(0, 2, 0.5)
+    )
     ax.set_aspect("equal", adjustable="box")
 
     ax.set_xlabel(r"$u$")

@@ -24,27 +24,21 @@ class UnicornNoise:
         lin_u = np.array([[0.1], [0.1], [0], [0]])
 
     class opt_prim(opt):
-        name = r"II-A Projected Primal"
+        name = r"Algo. 1, Projected Primal"
         alpha = 0.1
 
-    class opt_dualhprox_dist(opt):
-        name = r"III-C Dist. PRIME-H"
-        rho = 1e3
-        gamma_u = 20
-        centralized = False
-
-    class opt_dualhprox_cent(opt):
-        name = r"III-C Cent. PRIME-H"
-        rho = 1e3
-        gamma_u = 10
-        centralized = True
-
     class opt_dualy(opt):
-        name = r"II-B Primal-Dual $C_y$"
+        name = r"Algo. 2, Primal-Dual $C_y$"
         alpha = 4
         beta = 8
 
     class opt_dualh(opt):
-        name = r"III-B Primal-Dual $h(u)$"
+        name = r"Algo. 4, Primal-Dual $h(u)$"
         alpha = 4
         beta = 2
+
+    class opt_dualhprox_dist(opt):
+        name = r"Algo. 5, PRIME-H"
+        rho = 1e3
+        gamma_u = 20
+        centralized = False

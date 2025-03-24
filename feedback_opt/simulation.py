@@ -6,7 +6,6 @@ from feedback_opt.systems.system_base import SystemBase
 
 
 class Simulation:
-
     def __init__(
         self,
         params,
@@ -62,7 +61,9 @@ class Simulation:
         data_k["d"] = np.linalg.norm(data_k["u"] - self.u_opt, keepdims=True)
 
         # initialize history dict
-        history = {key: np.zeros((self.n_steps + 1, value.shape[0])) for key, value in data_k.items()}
+        history = {
+            key: np.zeros((self.n_steps + 1, value.shape[0])) for key, value in data_k.items()
+        }
 
         # log initial timestep k=0
         self.log(history, 0, data_k)

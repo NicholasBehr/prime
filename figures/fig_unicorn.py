@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-from scenarios.scenario_unicorn import Unicorn
 from tqdm import tqdm
 
 from feedback_opt.optimizers import (
@@ -11,6 +10,7 @@ from feedback_opt.optimizers import (
 from feedback_opt.simulation import Simulation
 from feedback_opt.systems import SystemElectrical
 from feedback_opt.utils import plot_cost_and_violation
+from scenarios.scenario_unicorn import Unicorn
 
 
 def fig_unicorn():
@@ -28,7 +28,6 @@ def fig_unicorn():
         OptimizerDualY(params.opt_dualy, system),
         OptimizerDualH(params.opt_dualh, system),
         OptimizerDualHProximal(params.opt_dualhprox_dist, system),
-        OptimizerDualHProximal(params.opt_dualhprox_cent, system),
     ]
     simulation = [Simulation(params.sim, system, opt) for opt in optimizer]
     results = [(sim.optimizer.name, sim.run()) for sim in tqdm(simulation)]

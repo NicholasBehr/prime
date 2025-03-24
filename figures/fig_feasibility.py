@@ -40,7 +40,9 @@ def fig_feasibility():
     # linearization
     ax.axvspan(z1, z2, color="C3", alpha=0.3, label="primal infeasible region")
 
-    ax.set(xlim=(-2.5, 1), xticks=np.arange(-2.5, 1.5, 0.5), ylim=(0, 1.5), yticks=np.arange(0, 2, 0.5))
+    ax.set(
+        xlim=(-2.5, 1), xticks=np.arange(-2.5, 1.5, 0.5), ylim=(0, 1.5), yticks=np.arange(0, 2, 0.5)
+    )
     ax.set_aspect("equal", adjustable="box")
 
     ax.set_xlabel(r"$u$")

@@ -74,25 +74,18 @@ class NonConvexToy:
         lin_y = np.array([[5]])
 
     class opt_prim(opt):
-        name = r"II-A Projected Primal"
+        name = r"Algo. 1, Projected Primal"
         alpha = 0.3
 
+    class opt_dualyprox_dist(opt):
+        name = r"Algo. 3, PRIME-Y"
+        rho = 0.3
+        gamma_u = 10
+        centralized = True
+
     class opt_dualhprox_dist(opt):
-        name = r"III-C Dist. PRIME-H"
+        name = r"Algo. 5, PRIME-H"
         rho = 0.3
         gamma_u = 5
         gamma_z = 5
         centralized = False
-
-    class opt_dualhprox_cent(opt):
-        name = r"III-C Cent. PRIME-H"
-        rho = 0.3
-        gamma_u = 5
-        gamma_z = 5
-        centralized = True
-
-    class opt_dualyprox_dist(opt):
-        name = r"III-A Dist. PRIME-Y"
-        rho = 0.3
-        gamma_u = 10
-        centralized = True

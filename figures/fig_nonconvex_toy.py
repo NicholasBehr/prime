@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-from scenarios.scenario_nonconvex_toy import NonConvexToy
 from tqdm import tqdm
 
 from feedback_opt.optimizers import (
@@ -10,6 +9,7 @@ from feedback_opt.optimizers import (
 from feedback_opt.simulation import Simulation
 from feedback_opt.systems import SystemNonLinear
 from feedback_opt.utils import plot_cost_and_violation
+from scenarios.scenario_nonconvex_toy import NonConvexToy
 
 
 def fig_nonconvex_toy():
@@ -29,7 +29,6 @@ def fig_nonconvex_toy():
         OptimizerPrimal(params.opt_prim, system),
         OptimizerDualYProximal(params.opt_dualyprox_dist, system),
         OptimizerDualHProximal(params.opt_dualhprox_dist, system),
-        OptimizerDualHProximal(params.opt_dualhprox_cent, system),
     ]
     simulation = [Simulation(params.sim, system, opt) for opt in optimizer]
     results = [(sim.optimizer.name, sim.run()) for sim in tqdm(simulation)]

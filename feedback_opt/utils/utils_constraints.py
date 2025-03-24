@@ -90,7 +90,9 @@ class Argmin:
         self.lin = cp.Parameter(shape=(self.n, 1), name="lin")
 
         # objective
-        objective = cp.Minimize(cp.quad_form(self.x, self.quad, assume_PSD=True) + self.lin.T @ self.x)
+        objective = cp.Minimize(
+            cp.quad_form(self.x, self.quad, assume_PSD=True) + self.lin.T @ self.x
+        )
 
         # constraints
         constraints = [constraints.A @ self.x <= constraints.b]
@@ -98,7 +100,9 @@ class Argmin:
         # problem
         self.problem = cp.Problem(objective, constraints)
 
-    def solve(self, quad: np.ndarray, lin: np.ndarray, verify_psd: bool = False) -> np.ndarray | None:
+    def solve(
+        self, quad: np.ndarray, lin: np.ndarray, verify_psd: bool = False
+    ) -> np.ndarray | None:
         assert np.shape(quad) == (self.n, self.n)
         assert np.shape(lin) == (self.n, 1)
 

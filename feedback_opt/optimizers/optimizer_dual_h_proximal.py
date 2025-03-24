@@ -112,7 +112,13 @@ class OptimizerDualHProximal(OptimizerProximal):
         p += self.gamma_u / 2 * np.power(data_out["u"] - data_in["u"], 2)
 
         if self.centralized:
-            p += self.rho / 2 * np.multiply(data_out["u"] - data_in["u"], H.T @ H @ (data_out["u"] - data_in["u"]))
+            p += (
+                self.rho
+                / 2
+                * np.multiply(
+                    data_out["u"] - data_in["u"], H.T @ H @ (data_out["u"] - data_in["u"])
+                )
+            )
             p += self.rho * np.multiply(data_out["u"], H.T @ (data_in["y"] - data_out["z"]))
 
         data_out["p"] = p

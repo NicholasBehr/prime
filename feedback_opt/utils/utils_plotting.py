@@ -1,8 +1,7 @@
-import matplotlib.figure as figure
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from matplotlib import ticker
+from matplotlib import figure, ticker
 
 
 def plot_cost(
@@ -12,7 +11,11 @@ def plot_cost(
     x_tick_spacing: int = 200,
 ):
     fig, ax = plot_transition(
-        results=results, col_name="phi", fig=fig, transition=transition, x_tick_spacing=x_tick_spacing
+        results=results,
+        col_name="phi",
+        fig=fig,
+        transition=transition,
+        x_tick_spacing=x_tick_spacing,
     )
     fig.suptitle(r"cost $\phi$")
     ax.legend(loc="lower right")
@@ -27,7 +30,11 @@ def plot_y_violation(
     x_tick_spacing: int = 200,
 ):
     fig, ax = plot_transition(
-        results=results, col_name="y_violation", fig=fig, transition=transition, x_tick_spacing=x_tick_spacing
+        results=results,
+        col_name="y_violation",
+        fig=fig,
+        transition=transition,
+        x_tick_spacing=x_tick_spacing,
     )
     fig.suptitle(r"y-constraint violation $\|\cdot\|_2$")
     if max_violation is not None:
@@ -43,7 +50,12 @@ def plot_dist_to_optimal(
     x_tick_spacing: int = 200,
 ):
     fig, ax = plot_transition(
-        results=results, col_name="d", fig=fig, transition=transition, x_tick_spacing=x_tick_spacing, log_y=True
+        results=results,
+        col_name="d",
+        fig=fig,
+        transition=transition,
+        x_tick_spacing=x_tick_spacing,
+        log_y=True,
     )
     fig.suptitle(r"suboptimality $\|u-u^*\|_2$")
     ax.legend(loc="upper right")
@@ -59,11 +71,17 @@ def plot_cost_and_violation(
     fig = plt.figure()
     (fig1, fig2) = fig.subfigures(nrows=2, ncols=1)
     # 1
-    _, ax = plot_cost(results=results, fig=fig1, transition=transition, x_tick_spacing=x_tick_spacing)
+    _, ax = plot_cost(
+        results=results, fig=fig1, transition=transition, x_tick_spacing=x_tick_spacing
+    )
     ax.get_legend().remove()
     # 2
     plot_y_violation(
-        results=results, fig=fig2, transition=transition, max_violation=max_violation, x_tick_spacing=x_tick_spacing
+        results=results,
+        fig=fig2,
+        transition=transition,
+        max_violation=max_violation,
+        x_tick_spacing=x_tick_spacing,
     )
 
     fig1.subplots_adjust(left=10 / 100, wspace=5 / 100, right=95 / 100, top=0.85, bottom=0.15)
@@ -78,7 +96,6 @@ def plot_transition(
     x_tick_spacing: int = 200,
     log_y: bool = False,
 ):
-
     # ensure figure exists
     if fig is None:
         fig = plt.figure(constrained_layout=True)
@@ -96,7 +113,9 @@ def plot_transition(
         else:
             ax_right.plot(range(df.shape[0]), df, label=df.columns)
     else:
-        (ax_left, ax_right) = fig.subplots(nrows=1, ncols=2, gridspec_kw={"width_ratios": [1, 2]}, sharey="row")
+        (ax_left, ax_right) = fig.subplots(
+            nrows=1, ncols=2, gridspec_kw={"width_ratios": [1, 2]}, sharey="row"
+        )
         if log_y:
             ax_left.semilogy(range(transition + 1), df[: transition + 1], label=df.columns)
             ax_right.semilogy(range(transition, df.shape[0]), df[transition:], label=df.columns)

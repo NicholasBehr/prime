@@ -1,48 +1,35 @@
-[tool.poetry]
+[project]
 name = "feedback-opt"
 version = "1.0.0"
-description = ""
-authors = ["NicholasBehr <github.fc3r26vy@mailalias.me>"]
 readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "cvxpy>=1.6.4",
+    "igraph>=0.11.8",
+    "matplotlib>=3.10.1",
+    "numba>=0.61.0",
+    "pandapower>=3.0.0",
+    "pandas>=2.2.3",
+    "tqdm>=4.67.1",
+]
 
-[tool.poetry.scripts]
+[project.scripts]
 create_figures = "figures.create_figures:create_figures"
 
-[tool.poetry.dependencies]
-python = "^3.12"
-pandas = "^2.2.2"
-pandapower = "^2.14.11"
-cvxpy = "^1.5.3"
-numba = "^0.60.0"
-matplotlib = "^3.9.2"
-igraph = "^0.11.6"
-tqdm = "^4.67.0"
-
-[tool.poetry.group.dev.dependencies]
-jupyterlab = "^4.2.5"
-black = "^24.8.0"
-pylint = "^3.2.7"
-isort = "^5.13.2"
+[dependency-groups]
+dev = [
+    "jupyterlab>=4.3.6",
+    "ruff>=0.11.2",
+]
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.black]
-line-length = 120
-target_version = ['py312']
+[tool.hatch.build.targets.wheel]
+packages = ["feedback_opt"]
 
-[tool.isort]
-profile = "black"
-src_paths = ["feedback_opt"]
-
-[tool.pylint.FORMAT]
-output-format = "colorized"
-max-line-length = 120
-
-[tool.pylint.messages_control]
-disable = [
-    # Disable failure for TODO items in the codebase (code will always have TODOs).
-    "fixme",
-    "missing-docstring",
-]
+[tool.ruff]
+exclude = [".venv"]
+line-length = 100
+target-version = "py312"
