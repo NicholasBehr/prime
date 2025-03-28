@@ -99,8 +99,8 @@ class OptimizerDualHProximal(OptimizerProximal):
         data_out = data_in.copy()
 
         ## output actor
-        data_out["z"] = self.next_z(data_out)
         data_out["nu_h"] = self.next_nu_h(data_out)
+        data_out["z"] = self.next_z(data_out)
 
         ## input actor
         # update
