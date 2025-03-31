@@ -2,7 +2,6 @@ import matplotlib.pyplot as plt
 from tqdm import tqdm
 
 from feedback_opt.optimizers import (
-    OptimizerDualH,
     OptimizerDualHProximal,
     OptimizerDualY,
     OptimizerPrimal,
@@ -26,7 +25,6 @@ def fig_unicorn():
     optimizer = [
         OptimizerPrimal(params.opt_prim, system),
         OptimizerDualY(params.opt_dualy, system),
-        OptimizerDualH(params.opt_dualh, system),
         OptimizerDualHProximal(params.opt_dualhprox_dist, system),
     ]
     simulation = [Simulation(params.sim, system, opt) for opt in optimizer]

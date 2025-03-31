@@ -29,12 +29,12 @@ class Unicorn:
         beta = 8
 
     class opt_dualh(opt):
-        name = r"Algo. 4, Primal-Dual $h(u)$"
+        name = r"Algo. -, Primal-Dual $h(u)$"
         alpha = 4
         beta = 2
 
     class opt_dualhprox_dist(opt):
-        name = r"Algo. 5, PRIME-H"
+        name = r"Algo. 4, PRIME-H"
         rho = 1e3
         gamma_u = 20
         centralized = False

@@ -84,7 +84,7 @@ class NonConvexToy:
         centralized = True
 
     class opt_dualhprox_dist(opt):
-        name = r"Algo. 5, PRIME-H"
+        name = r"Algo. 4, PRIME-H"
         rho = 0.3
         gamma_u = 5
         gamma_z = 5
