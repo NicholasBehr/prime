@@ -37,8 +37,15 @@ class UnicornNoise:
         alpha = 4
         beta = 2
 
+    class opt_dualyprox_dist(opt):
+        name = r"Algo. 4, PRIME-Y"
+        rho = 1e3
+        gamma_u = 20
+        centralized = False
+
     class opt_dualhprox_dist(opt):
         name = r"Algo. 4, PRIME-H"
         rho = 1e3
         gamma_u = 20
+        gamma_z = 20
         centralized = False

@@ -4,6 +4,7 @@ from tqdm import tqdm
 from feedback_opt.optimizers import (
     OptimizerDualHProximal,
     OptimizerDualY,
+    OptimizerDualYProximal,
     OptimizerPrimal,
 )
 from feedback_opt.simulation import Simulation
@@ -25,6 +26,7 @@ def fig_unicorn_noise():
     optimizer = [
         OptimizerPrimal(params.opt_prim, system),
         OptimizerDualY(params.opt_dualy, system),
+        OptimizerDualYProximal(params.opt_dualyprox_dist, system),
         OptimizerDualHProximal(params.opt_dualhprox_dist, system),
     ]
     simulation = [Simulation(params.sim, system, opt) for opt in optimizer]
