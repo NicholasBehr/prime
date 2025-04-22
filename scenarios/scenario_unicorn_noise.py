@@ -28,12 +28,12 @@ class UnicornNoise:
         alpha = 0.1
 
     class opt_dualy(opt):
-        name = r"Algo. 2, Primal-Dual $C_y$"
+        name = r"Algo. 2, Primal-Dual"
         alpha = 4
         beta = 8
 
     class opt_dualh(opt):
-        name = r"Algo. -, Primal-Dual $h(u)$"
+        name = r"Algo. -, Primal-Dual"
         alpha = 4
         beta = 2
 

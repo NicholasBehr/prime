@@ -4,6 +4,5 @@
 
 ### Generate Figures
 ```console
-poetry install
-poetry run create_figures
+uv run create_figures
 ```
