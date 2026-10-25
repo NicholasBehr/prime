@@ -1,13 +1,16 @@
 # PRIME: Fast Primal-Dual Feedback Optimization for Markets
 
-[![Paper](https://img.shields.io/badge/DOI-10.1109%2FCDC57313.2025.11312508-blue)](https://doi.org/10.1109/CDC57313.2025.11312508)
-[![arXiv](https://img.shields.io/badge/arXiv-2504.16048-b31b1b.svg)](https://arxiv.org/abs/2504.16048)
+[![Published paper](https://img.shields.io/badge/IEEE-10.1109%2FCDC57313.2025.11312508-blue)](https://doi.org/10.1109/CDC57313.2025.11312508)
+[![Open-access preprint](https://img.shields.io/badge/arXiv-2504.16048-b31b1b.svg)](https://arxiv.org/abs/2504.16048)
 [![Python](https://img.shields.io/badge/Python-%E2%89%A53.12-3776AB.svg)](https://www.python.org/)
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC_BY--SA_4.0-lightgrey.svg)](LICENSE)
 
 This repository contains the reference implementation and numerical experiments for
 **PRIME (PRoximal Iterative MarkEts)**, an online feedback optimization method for
 coordinating self-interested actors connected through a physical system.
+
+**Paper:** [IEEE version of record](https://doi.org/10.1109/CDC57313.2025.11312508) ·
+[Open-access preprint](https://arxiv.org/abs/2504.16048)
 
 PRIME combines a primal-dual formulation with proximal updates. It uses measurements of
 the system output and input-output sensitivities, while allowing actors' costs and
@@ -94,6 +97,14 @@ classes.
 
 If you use this repository in your work, please cite the published paper:
 
+> N. J. Behr, M. Bianchi, K. Moffat, S. Bolognani, and F. Dörfler,
+> “PRIME: Fast Primal-Dual Feedback Optimization for Markets with Application to Optimal
+> Power Flow,” in *2025 IEEE 64th Conference on Decision and Control (CDC)*,
+> pp. 5240–5245, 2025. doi:
+> [10.1109/CDC57313.2025.11312508](https://doi.org/10.1109/CDC57313.2025.11312508).
+
+An [open-access preprint](https://arxiv.org/abs/2504.16048) is also available on arXiv.
+
 ```bibtex
 @inproceedings{behr2025prime,
   author    = {Behr, Nicholas J. and Bianchi, Mattia and Moffat, Keith and
@@ -103,9 +114,7 @@ If you use this repository in your work, please cite the published paper:
   booktitle = {2025 IEEE 64th Conference on Decision and Control (CDC)},
   year      = {2025},
   pages     = {5240--5245},
-  doi       = {10.1109/CDC57313.2025.11312508},
-  eprint    = {2504.16048},
-  archivePrefix = {arXiv}
+  doi       = {10.1109/CDC57313.2025.11312508}
 }
 ```
 
